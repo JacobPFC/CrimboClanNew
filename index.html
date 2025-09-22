@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CrimboClan - Chris Surprise</title>
+<style>
+body { margin:0; padding:0; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#222; color:white; font-family:Arial, sans-serif; overflow:hidden; cursor:pointer; }
+#revealImage { width:50vw; height:50vw; max-width:400px; max-height:400px; object-fit:cover; border-radius:12px; display:none; animation:popIn 0.6s ease forwards; }
+#caption { margin-top:15px; font-size:1.8rem; font-weight:bold; text-align:center; opacity:0; animation:fadeIn 2s forwards; display:none; }
+@keyframes popIn {0%{transform:scale(0.5);opacity:0;}100%{transform:scale(1);opacity:1;}}
+@keyframes fadeIn { to { opacity:1; } }
+#startMessage { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:1.5rem; text-align:center; }
+</style>
+</head>
+<body>
+
+<div id="startMessage">Tap anywhere to start!</div>
+<img id="revealImage" src="images/chris.png" alt="Chris">
+<div id="caption">Cream To Chris!</div>
+
+<audio id="audioTrack" src="audio/lil-philips.mp3" preload="auto"></audio>
+
+<script>
+const revealImage=document.getElementById('revealImage');
+const caption=document.getElementById('caption');
+const startMessage=document.getElementById('startMessage');
+const audioTrack=document.getElementById('audioTrack');
+
+function startSequence(){
+  revealImage.style.display='block';
+  caption.style.display='block';
+  audioTrack.play().catch(()=>{});
+}
+
+function init(){
+  startMessage.style.display='none';
+  startSequence();
+}
+
+document.body.addEventListener('click', function handler(){
+  document.body.removeEventListener('click', handler);
+  init();
+});
+</script>
+
+</body>
+</html>
