@@ -47,21 +47,20 @@ const caption = document.getElementById('caption');
 const startMessage = document.getElementById('startMessage');
 const audioTrack = document.getElementById('audioTrack');
 
-// List of images, last one is the fallback
+// All images including fallback
 const images = [
   "images/chris.png",
   "images/alfie-suprise.png",
+  "images/alfie-looking.png",
+  "images/all_coons.jpg",
   "images/backup.png" // fallback image if others fail
 ];
 let index = 0;
 let intervalId = null;
 
-// Function to safely change image
+// Safely switch image
 function changeImage() {
-  let next = index + 1;
-  if(next >= images.length) next = 0;
-  
-  // Try loading the next image
+  let next = (index + 1) % images.length;
   const testImg = new Image();
   testImg.src = images[next];
   testImg.onload = () => {
@@ -69,7 +68,6 @@ function changeImage() {
     index = next;
   };
   testImg.onerror = () => {
-    // If error, use fallback (last image)
     revealImage.src = images[images.length-1];
     index = images.length-1;
   };
@@ -79,7 +77,7 @@ function startSequence() {
   revealImage.style.display = 'block';
   caption.style.display = 'block';
   audioTrack.play().catch(()=>{});
-  intervalId = setInterval(changeImage, 5000);
+  intervalId = setInterval(changeImage, 5000); // switch every 5s
 }
 
 function init() {
