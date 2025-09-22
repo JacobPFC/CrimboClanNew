@@ -40,20 +40,26 @@ body {
 <div id="caption">Cream To Chris!</div>
 
 <audio id="audioTrack" src="audio/lil-philips.mp3" preload="auto"></audio>
+<audio id="airHorn" src="audio/airhorn.mp3" preload="auto"></audio>
 
 <script>
 const revealImage = document.getElementById('revealImage');
 const caption = document.getElementById('caption');
 const startMessage = document.getElementById('startMessage');
 const audioTrack = document.getElementById('audioTrack');
+const airHorn = document.getElementById('airHorn');
 
-// All images including fallback
+// Preload Chris image for instant display
+const chrisImage = new Image();
+chrisImage.src = "images/chris.png";
+
 const images = [
   "images/chris.png",
   "images/alfie-suprise.png",
   "images/alfie-looking.png",
   "images/all_coons.jpg",
-  "images/backup.png" // fallback image if others fail
+  "images/Mason.jpg",
+  "images/backup.png" // fallback image
 ];
 let index = 0;
 let intervalId = null;
@@ -77,6 +83,7 @@ function startSequence() {
   revealImage.style.display = 'block';
   caption.style.display = 'block';
   audioTrack.play().catch(()=>{});
+  airHorn.play().catch(()=>{}); // play air horn at start
   intervalId = setInterval(changeImage, 5000); // switch every 5s
 }
 
